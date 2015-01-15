@@ -1,0 +1,33 @@
+@(title: String, head: Html = Html(""),  footer: Html = Html(""))(content: Html)(implicit request:Request[_])
+
+@import _root_.helper._
+
+@if(SpfHelper.isNavigation()){
+	@SpfHelper.toJson(title)(head)(content)(footer)
+}else {
+	<!DOCTYPE html>
+	<html>
+	    <head>
+	    <title>@title</title>
+	        @head
+	    </head>
+	    <body>
+	    	<section id="menu" style="width: 20%; float: left;">
+	    		<nav>
+					<ul>
+						<li><a class="spf-link" href="/page/1">Page 1</a></li>
+						<li><a class="spf-link" href="/page/2">Page 2</a></li>
+					</ul>
+				</nav>
+	  		</section>
+	  		<section id="content" style="width: 80%; float: right;">
+	  			@content
+	  		</section>   
+	    </body>
+	    <footer>
+	    	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/spf/2.1.1/spf.js"></script>
+	    	<script type="text/javascript">spf.init();</script>
+	    	@footer
+	    </footer>    
+	</html>
+}
